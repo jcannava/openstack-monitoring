@@ -33,16 +33,4 @@ if node.recipe?("glance::glance-api")
 
             alarms(:failure_min => 2.0)
 	end
-
-	# set up glance api monitoring (bytes/objects per tentant, etc)
-	monitoring_metric "glance-api" do
-	    type "pyscript"
-	    script "glance_plugin.py"
-	    options(
-	        "Username" => node["glance"]["service_user"],
-	        "Password" => node["glance"]["service_pass"],
-	        "TenantName" => node["glance"]["service_tenant_name"],
-	        "AuthURL" => ks_service_endpoint["uri"]
-	    )
-	end
 end
